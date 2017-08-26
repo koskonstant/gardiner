@@ -1,0 +1,22 @@
+[
+  { "id": "0",
+    "image": "images/faces/Chris.png",
+    "level": "1",
+    "name": "Chris"},
+  { "id": "1",
+    "image": "images/faces/Chloe.png",
+    "level": "1",
+    "name": "Chloe" },
+  { "id": "8",
+    "image": "images/faces/Carlos.png",
+    "level": "1",
+    "name": "Carlos" },
+  { "id": "6",
+    "image": "images/faces/Elisa.png",
+    "level": "1",
+    "name": "Elisa" },
+  { "id": "15",
+    "image": "images/faces/Mary.png",
+    "level": "2",
+    "name": "Mary" }
+]
