@@ -15,6 +15,7 @@ define('DBNAME','ser_game');
 define('DIR','game.local');
 define('SITEEMAIL','noreply@domain.com');
 
+
 try {
 
 	//create PDO connection
@@ -27,8 +28,9 @@ try {
     exit;
 }
 
+$path = $_SERVER['DOCUMENT_ROOT']. '/gardiner/';
 //include the user class, pass in the database connection
-include('classes/user.php');
-include('classes/phpmailer/mail.php');
+include($path.'classes/user.php');
+include($path.'classes/phpmailer/mail.php');
 $user = new User($db);
 ?>
