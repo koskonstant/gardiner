@@ -63,7 +63,7 @@ require('layout/nav.php');
 	?>
 	<script src="js/main.js"></script>
 	<script>
-		loadFaces("/game/data/quizData.json",level) ;
+		loadFaces("/gardiner/data/quizData.json",level) ;
 	</script>	
 
 </body>

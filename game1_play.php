@@ -58,7 +58,7 @@ require('layout/nav.php');
 	?>
 	<script src="js/main.js"></script>
 	<script>
-		startGame("/game/data/quizData.json", 1);
+		startGame("/gardiner/data/quizData.json", 1);
 	</script>	
 </body>
 </html>
