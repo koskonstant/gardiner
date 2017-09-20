@@ -360,7 +360,7 @@
       },
       {
         id : 44,
-        title: "",
+        title: "Elisa",
         img: "images/faces/Elisa.png",
         cat: "faces",
         audio: "Elisa.mp3"
@@ -490,9 +490,9 @@
       <div class="col-md-6">\
       <h3 class="mg__start-screen--sub-heading">Select Category</h3>\
       <select id="categories" class="mg__start-screen--category-select">\
-        <option value="fruits" selected>Fruits</option>\
-        <option value="faces">Faces</option>\
-        <option value="colors">Colors</option>\
+        <option value="fruits" data-catid="1" selected>Fruits</option>\
+        <option value="faces" data-catid="2">Faces</option>\
+        <option value="colors" data-catid="3">Colors</option>\
       </select>\
       </div>\
       </div>\
@@ -548,6 +548,8 @@
   Memory.prototype._setupGameWrapper = function(levelNode) {
     this.level = document.getElementById("levels").value;
     this.category = document.getElementById("categories").value;
+    var e = document.getElementById("categories");
+    this.categoryid = e.options[e.selectedIndex].dataset.catid;
     this.gameStartScreen.parentNode.removeChild(this.gameStartScreen);
     this.gameContents.className = "mg__contents mg__level-"+this.level;
     this.game.appendChild(this.gameWrapper);
@@ -605,7 +607,7 @@
     this.options.onGameStart();
     this._gamePlay();
     this._timerPlay();
-    this._countClicks();
+    this._countClicks();        
   }
 
   Memory.prototype._timerPlay = function() {
@@ -639,10 +641,10 @@
 
   Memory.prototype._gamePlay = function() {
     var tiles = document.querySelectorAll("[data-cat='" + this.chosenCategory + "']");
-    // console.log(tiles);
+    console.log(tiles);
     for (var i = 0, len = tiles.length; i < len; i++) {
       var tile = tiles[i];
-      //console.log(tile);
+      console.log(tile);
       this._gamePlayEvents(tile);
     };
   };
@@ -665,7 +667,7 @@
          clicks++;
          var updatedClicks = this.setAttribute('data-clicks', clicks);
       };   
-    };
+    };    
   };
 
   
@@ -854,8 +856,7 @@
     clock = document.getElementById("clock").innerHTML;
     if (this.options.onGameEnd() === false) {     
      var tilenumber = document.querySelectorAll(".mg__tile");     
-     var tiles = document.querySelectorAll("[data-cat='" + this.chosenCategory + "']");
-     console.log(tiles);
+     var tiles = document.querySelectorAll("[data-cat='" + this.chosenCategory + "']");     
      var tile;
      var tilenum;
      var tilename;
@@ -879,9 +880,10 @@
       document.getElementById("time-block").classList.add("hide");
       this.gameMessages.innerHTML = '<h2 class="mg__onend--heading">Well Done!</h2>\
         <p class="mg__onend--message">You finished the round in ' + this.numMoves + ' moves in ' + clock + ' seconds. Go you.</p>\
-        <div>' + msg + '</div>\
+        <div class="click_msg">' + msg + '</div>\
         <button id="mg__onend--restart" class="mg__button">Play again?</button>';
       this._timerStop();
+      this.timeFinished = clock;
       this.game.appendChild(this.gameMessages);
       document.getElementById("mg__onend--restart").addEventListener( "click", function(e) {
         self.resetGame();
@@ -890,7 +892,34 @@
       // run callback
       this.options.onGameEnd();
     }
+    this._storeData();
   }
+
+
+
+
+Memory.prototype._storeData = function() {
+  var clickMsg= document.querySelector(".click_msg").innerHTML;
+  var TableData = { 
+        "game_level" :this.chosenLevel,
+        "game_category" :this.categoryid,
+        "game_clicks" :clickMsg,
+        "game_moves" :this.numMoves,
+        "game_time_finished" :this.timeFinished
+    };
+   
+    $.ajax({      
+      url: "models/game2.php",
+      data: TableData,
+      success: function(data){
+        // window.location='models/game2.php'
+        // console.log(data);         
+    }
+  });
+    
+};
+
+
 
   /**
    * Memory resetGame
