@@ -35,7 +35,7 @@ $show_user_selection = ($is_admin==1) ? ',`members`.`USR_FName`,`members`.`USR_L
 			<div class="tab-content">
 				<div id="game1" class="tab-pane fade in active">
 					<h3 class="text-center">Game 1 Logs</h3>
-					<div class="table-responsive">						
+					<div class="table-wrapper">						
 						<?php								
 						$result = $db->prepare("SELECT `game_sessions`.*, `artifact_types`.`art_type`,`levels`.`difficulty_characterization` $show_user_selection 
 												FROM `game_sessions` 
@@ -51,7 +51,7 @@ $show_user_selection = ($is_admin==1) ? ',`members`.`USR_FName`,`members`.`USR_L
 						$user_th = ($is_admin==1) ? '<th>User</th>':'';						
 						if($number_of_rows>0  ){
 						?>
-						<table class="table table-bordered table-hover normaltopmargin">
+						<table id="game1-table" class="table table-hover normaltopmargin table-striped table-bordered">
 							<caption class="text-center">Logs History</caption>
 							<thead>
 								<tr>
@@ -91,7 +91,7 @@ $show_user_selection = ($is_admin==1) ? ',`members`.`USR_FName`,`members`.`USR_L
 				</div>
 				<div id="game2" class="tab-pane fade">
 					<h3 class="text-center">Game 2 Logs</h3>
-					<div class="table-responsive">						
+					<div class="table-wrapper">						
 						<?php 		
 						$result = $db->prepare("SELECT `game_sessions`.*, `artifact_types`.`art_type`,`levels`.`difficulty_characterization` $show_user_selection 
 												FROM `game_sessions` 
@@ -106,7 +106,7 @@ $show_user_selection = ($is_admin==1) ? ',`members`.`USR_FName`,`members`.`USR_L
 						$number_of_rows = $result->rowCount();
 						if($number_of_rows>0  ){
 						?>
-						<table class="table table-bordered table-hover normaltopmargin">
+						<table id="game2-table" class="table table-hover normaltopmargin table-striped table-bordered">
 							<caption class="text-center">Logs History</caption>
 							<thead>
 								<tr>

@@ -217,6 +217,19 @@ img {
 	margin-top: 20px;
 }
 
+.table{
+  width:100%!important;
+}
+
+.table-wrapper label{
+  font-size:16px;
+  color:#222;
+}
+
+.table-wrapper select{
+  padding:0!important;
+}
+
 .table:after  {
 	content: "";
 	display: block;
@@ -2266,5 +2279,9 @@ figure.effect-oscar:hover img {
 
 .hide{
   display: none;
+}
+
+.normaltopmargin{
+  margin-top:40px;
 }
 
