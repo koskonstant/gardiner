@@ -5,6 +5,7 @@ if(!$user->is_logged_in()){ header('Location: login.php'); }
 
 //define page title
 $title = 'Game 1';
+$level = 1;
 
 //include header template
 require('layout/header.php');
@@ -26,7 +27,11 @@ require('layout/nav.php');
 									</div>
 
 									<div id="end" class="end-title center-align" style="display:none">
-										<button id="start-button" class="btn btn-game side-padding">Go to Next Level !</button>
+										<form action="models/game1.php">
+											<button id="nextlvlbutton" class="btn btn-game side-padding">Go to Next Level !</button>
+											<input type="hidden" id="datasend" name="qdat">
+											<input type="hidden" id="lvlid" name="level">
+										</form>
 									</div>
 
 									<img id="image" class="image-responsive imgartifact">
@@ -34,7 +39,7 @@ require('layout/nav.php');
 							</div>
 
 							<div class="namefillarea">
-								<h5 class="text-area" style="">My name is </h5> 
+								<h5 id="myname" style="display:none" class="text-area" style="">My name is </h5> 
 								<input id="text" type="text" style="display:none">							
 							</div>
 
@@ -56,9 +61,8 @@ require('layout/nav.php');
 	//include header template
 	require('layout/footer.php'); 
 	?>
-	<script src="js/main.js"></script>
 	<script>
-		startGame("/gardiner/data/quizData.json", 1);
+		startGame("/gardiner/data/quizData.json", <?= $level?>);
 	</script>	
 </body>
 </html>

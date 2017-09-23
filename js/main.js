@@ -1,4 +1,5 @@
 var ROOTPATH = ""
+console.log('file read');
 
 function startGame(url, level) {
   var quizData = [];
@@ -14,6 +15,9 @@ function startGame(url, level) {
   var $next = $('#next');
   var $hints = $('#hints');
   var $hintsused = $('#hintsused');
+  var $nextlvl = $('#nextlvlbutton');
+  var $myname = $('#myname');
+  var $lvlid = $('#lvlid');
 
   var startTime;
   var timeInterval;
@@ -61,6 +65,7 @@ function startGame(url, level) {
 
     if (index === 0) {
       $start.hide();
+      $myname.show();
       $answer.show();
       $help.show();
       $hints.show();
@@ -68,25 +73,29 @@ function startGame(url, level) {
       $seconds.show();
       $next.addClass('pulse');
       startQuestion();
+      console.log('quiz');
       return;
     }
 
     if (index === quizData.length) {
       $end.show();
       $next.hide();
+      $myname.hide();
       $seconds.text('');
       $answer.hide();
       $help.hide();
       $hints.hide();
       $hintsused.hide();
-      $next.hide();
       load('');
-      $('#dataSend').val(JSON.stringify(userAnswers));
+      $('#datasend').val(JSON.stringify(userAnswers));
+      $lvlid.val(level);
       $('#results-button').focus();
+      console.log(userAnswers);
       return;
     }
 
     startQuestion();
+    console.log('no if');
   }
 
   function load(image) {
@@ -132,6 +141,7 @@ function startGame(url, level) {
 
   function startQuestion() {
     $next.removeClass('scale-in');
+    $next.hide();
     load(ROOTPATH+quizData[index].image);
     addListeners(quizData[index].name);
     currentAnswer = Answer(quizData[index].id);
@@ -147,6 +157,7 @@ function startGame(url, level) {
     currentAnswer.time = $seconds.text();
     userAnswers.push(currentAnswer);
     $next.addClass('scale-in');
+    $next.show();
     $next.focus();
     console.log(userAnswers);
   }
