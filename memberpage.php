@@ -37,14 +37,10 @@ $show_user_selection = ($is_admin==1) ? ',`members`.`USR_FName`,`members`.`USR_L
 					<h3 class="text-center">Game 1 Logs</h3>
 					<div class="table-wrapper">						
 						<?php								
-						$result = $db->prepare("SELECT `game_sessions`.*, `artifact_types`.`art_type`,`levels`.`difficulty_characterization` $show_user_selection 
-												FROM `game_sessions` 
-												INNER JOIN `artifact_types` 
-												ON `game_sessions`.`game_category` =  `artifact_types`.`art_id` 
-												INNER JOIN `levels` 
-												ON `game_sessions`.`game_level` =  `levels`.`id`
-												$show_user
-												WHERE $show_admin `game_sessions`.`game_id`=1");
+						$result = $db->prepare("SELECT `game_sessions`.* $show_user_selection
+                                                FROM `game_sessions`                                               
+                                                $show_user
+                                                WHERE $show_admin `game_sessions`.`game_id`=1");
 												
 						$result->execute();
 						$number_of_rows = $result->rowCount();
@@ -59,9 +55,7 @@ $show_user_selection = ($is_admin==1) ? ',`members`.`USR_FName`,`members`.`USR_L
 								<?php echo $user_th; ?>
 								<th>Date</th>
 								<th>Level</th>
-								<th>Category</th>
-								<th>Clicks</th>
-								<th>Moves</th>
+								<th>Hints</th>
 								<th>Time (sec)</th>
 								</tr>
 							</thead>
@@ -75,10 +69,8 @@ $show_user_selection = ($is_admin==1) ? ',`members`.`USR_FName`,`members`.`USR_L
 								<td><?php echo $i+1; ?></td>
 								<?php echo $user_td; ?>
 								<td><?php echo $row['start_datetime']; ?></td>
-								<td><?php echo $row['difficulty_characterization']; ?></td>
-								<td><?php echo $row['art_type']; ?></td>
+								<td><?php echo $row['game_level']; ?></td>
 								<td><?php echo $row['game_clicks']; ?></td>
-								<td><?php echo $row['game_moves']; ?></td>
 								<td><?php echo $row['game_time_finished']; ?></td>
 								</tr>
 								<?php } ?>
@@ -87,6 +79,12 @@ $show_user_selection = ($is_admin==1) ? ',`members`.`USR_FName`,`members`.`USR_L
 							<?php } ?>
 							</tbody>								
 						</table>
+						<?php if ($is_admin==1){ ?>
+						<div class="exporting normaltopmargin">
+							<h4>Export Json file</h4>
+						<a id="expjson" href="/gardiner/jsonexport.php" download class="dlbtn">Download<span class="details">json</span></a>
+						</div>
+						<?php } ?>						
 					</div><!--end of .table-responsive-->
 				</div>
 				<div id="game2" class="tab-pane fade">
@@ -140,7 +138,13 @@ $show_user_selection = ($is_admin==1) ? ',`members`.`USR_FName`,`members`.`USR_L
 							<p class="text-center">Logs Not found</p>
 							<?php } ?>
 							</tbody>								
-						</table>
+						</table>						
+						<?php if ($is_admin==1){ ?>
+						<div class="exporting normaltopmargin">
+							<h4>Export Json file</h4>
+						<a id="expjson" href="/gardiner/jsonexport1.php" download class="dlbtn">Download<span class="details">json</span></a>
+						</div>
+						<?php } ?>
 					</div><!--end of .table-responsive-->
 				</div>		
 			</div>
