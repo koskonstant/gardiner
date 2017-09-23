@@ -224,10 +224,29 @@ img {
 .table-wrapper label{
   font-size:16px;
   color:#222;
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
 }
 
 .table-wrapper select{
   padding:0!important;
+  display: inline-block!important;
+  width: auto!important;
+  vertical-align: middle!important;
+  margin:0px 10px;
+}
+
+.table-wrapper label input{
+  display: inline-block!important;
+  font-size:16px!important;
+  width: auto!important;
+  vertical-align: middle!important;
+}
+
+.dataTables_paginate * {
+    display: inline-block;
 }
 
 .table:after  {
@@ -840,6 +859,15 @@ li.next:hover, li.previous:hover{
   box-shadow: none;
   border-color: #eee;
 }
+
+.user-menu .dropdown-menu {
+  background: #eee;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > .user-footer{
+   background: #f4dcdc!important;
+}
+
 .dropdown-menu > li > a {
   color: #777;
 }
@@ -2285,3 +2313,55 @@ figure.effect-oscar:hover img {
   margin-top:40px;
 }
 
+/** download button effect **/
+a.dlbtn {
+  display: inline-block;
+  position: relative;
+  height: 45px;
+  line-height: 40px;
+  overflow: hidden;
+  padding: 0 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #5381bf;
+  background-color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  border: 3px solid #5381bf;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+ 
+a.dlbtn:hover, a.dlbtn:focus {
+  color: #fff;
+  padding-right: 90px;
+  background-color: #5381bf;
+  border-color: #5381bf;
+}
+
+a.dlbtn .details {
+  position: absolute;
+  line-height: 25px;
+  top: 4px;
+  right: -15px;
+  opacity: 0;
+  background: #49668c;
+  color: #fff;
+  text-align: center;
+  padding: 4px 9px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: right 0.4s linear, opacity 0.25s;
+  -moz-transition: right 0.4s linear, opacity 0.25s;
+  transition: right 0.4s linear, opacity 0.25s;
+}
+ 
+a.dlbtn:hover .details, a.dlbtn:focus .details {
+  right: 8px;
+  opacity: 1;
+}

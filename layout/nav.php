@@ -2,7 +2,7 @@
 <header class="main-header">  
 	<div class="main-header-inner container">
 		<div class="col-md-3 col-xs-3">
-			<a href="/" class="logo">
+			<a href="/gardiner" class="logo">
 		      GARDINER
 		    </a>
 	    </div>
