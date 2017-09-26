@@ -40,6 +40,8 @@ require('layout/nav.php');
 
 						<div class="textcont">
 							<h5 id="text" class="text-area" style="display:none">My name is <span id="name"></span></h5>
+							<audio id="audioNameEngine"></audio>
+							<audio id="audioEngine"></audio>
 						</div>
 
 						<div class="navigation">
@@ -61,7 +63,6 @@ require('layout/nav.php');
 	//include header template
 	require('layout/footer.php'); 
 	?>
-	<script src="js/main.js"></script>
 	<script>
 		loadFaces("/gardiner/data/quizData.json",level) ;
 	</script>	

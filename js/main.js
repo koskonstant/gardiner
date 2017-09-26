@@ -221,15 +221,37 @@ function loadFaces(url, level) {
       load('', '');
       return;
     }
-    console.log(quizData[index].image, quizData[index].name);
-    load(quizData[index].image, quizData[index].name);
+    console.log(quizData[index].image, quizData[index].name,quizData[index].audio );
+    load(quizData[index].image, quizData[index].name, quizData[index].audio);
   }
 
-  function load(image, name) {
-    console.log(image, name);
+  function load(image, name, audio) {
+    console.log(image, name, audio);
     $image.attr('src', '');
     $image.attr('src', image);
     $name.text(name);
+    if(typeof(quizData[index]) != "undefined"){    
+      playNameAudio('mp3/my-name-is.mp3');
+      setTimeout(function() {
+        playAudio('mp3/faces/' + quizData[index].audio);
+      }, 900); 
+    }   
+  }
+
+  function playNameAudio(sAudio) {
+    var audioName = document.getElementById('audioNameEngine');
+    if(audioName !== null) {
+      audioName.src = sAudio;
+      audioName.play();
+    } 
+  }
+
+  function playAudio(sAudio) {
+    var audioElement = document.getElementById('audioEngine');
+    if(audioElement !== null) {
+      audioElement.src = sAudio;
+      audioElement.play();
+    } 
   }
 
   $next.click(function () {
