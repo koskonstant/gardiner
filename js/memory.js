@@ -490,9 +490,9 @@
       <div class="col-md-6">\
       <h3 class="mg__start-screen--sub-heading">Select Category</h3>\
       <select id="categories" class="mg__start-screen--category-select">\
-        <option value="fruits" data-catid="1" selected>Fruits</option>\
-        <option value="faces" data-catid="2">Faces</option>\
-        <option value="colors" data-catid="3">Colors</option>\
+        <option value="faces" data-catid="1" selected>Faces</option>\
+        <option value="colors" data-catid="2">Colors</option>\
+        <option value="fruits" data-catid="3">Fruits</option>\
       </select>\
       </div>\
       </div>\
@@ -783,10 +783,11 @@
   function playAudio(sAudio) {
   
   var audioElement = document.getElementById('audioEngine');
-        
+     console.log(audioElement);   
     if(audioElement !== null) {
 
       audioElement.src = sAudio;
+      
       audioElement.play();
     } 
   }

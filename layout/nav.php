@@ -105,7 +105,7 @@
 					</li>			      
 					<li class="flags-menu">
 			      	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<img src="img/blank.gif" class="flag flag-us"> 
+								<img src="" class="flag flag-us"> 
 								<i class="fa fa-angle-down"></i>
 							</a>
 			        <ul class="dropdown-menu dropdown-flags-list">					
