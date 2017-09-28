@@ -23,9 +23,10 @@ function startGame(url, level) {
   var timeInterval;
   var userAnswers = [];
   var currentAnswer;
-  var Answer = function (id) {
+  var Answer = function (id,name) {
     return {
       id: id,
+      name:name,
       helps: 0,
       time: 0
     }
@@ -61,6 +62,26 @@ function startGame(url, level) {
     update();
   });
 
+  $next.one("click", function(){
+    $seconds.show();
+    if (index === quizData.length) {
+      $seconds.text('');
+      return;
+    }
+    startTimer();
+    function startTimer() {
+      startTime = Date.now();
+      updateClock();
+      timeInterval = setInterval(updateClock,1000);
+    }
+
+    function updateClock(){
+      $seconds.text(Math.round((Date.now()-startTime)/1000));
+    }
+  });
+
+ 
+
   function update() {
 
     if (index === 0) {
@@ -70,7 +91,7 @@ function startGame(url, level) {
       $help.show();
       $hints.show();
       $hintsused.show();
-      $seconds.show();
+     
       $next.addClass('pulse');
       startQuestion();
       console.log('quiz');
@@ -81,7 +102,6 @@ function startGame(url, level) {
       $end.show();
       $next.hide();
       $myname.hide();
-      $seconds.text('');
       $answer.hide();
       $help.hide();
       $hints.hide();
@@ -101,17 +121,7 @@ function startGame(url, level) {
   function load(image) {
     $image.attr('src', '');
     $image.attr('src', image);
-  }
-
-  function startTimer() {
-    startTime = Date.now();
-    updateClock();
-    timeInterval = setInterval(updateClock,1000);
-  }
-
-  function updateClock(){
-    $seconds.text(Math.round((Date.now()-startTime)/1000));
-  }
+  } 
 
   function addListeners(name) {
     $answer.on('change', function () {
@@ -123,15 +133,19 @@ function startGame(url, level) {
       Materialize.toast('No! Try again!', 2000);
     });
 
+    var $updatedhints = $('#hintsused').text();
+
     $help.on('click', function () {
       if (currentAnswer.helps !== name.length - 1) {
         currentAnswer.helps++ ;
       }
       var tip = name.substr(0, currentAnswer.helps);
       Materialize.toast('Name starts with: ' + tip, 5000);
-      $hintsused.text(currentAnswer.helps);
+      var sumhints = parseInt(currentAnswer.helps) + parseInt($updatedhints);
+      $hintsused.text(sumhints);
       $answer.val(tip);
-    });
+    });       
+
   }
 
   function removeListeners() {
@@ -144,14 +158,14 @@ function startGame(url, level) {
     $next.hide();
     load(ROOTPATH+quizData[index].image);
     addListeners(quizData[index].name);
-    currentAnswer = Answer(quizData[index].id);
+    currentAnswer = Answer(quizData[index].id,quizData[index].name);
     $answer.val('');
     $answer.focus();
-    startTimer();
+   
+   
   }
 
-  function completeQuestion() {
-    clearInterval(timeInterval);
+  function completeQuestion() {   
     removeListeners();
     Materialize.toast('Thats Right!', 4000);
     currentAnswer.time = $seconds.text();
@@ -218,7 +232,7 @@ function loadFaces(url, level) {
       $end.show();
       $text.hide();
       $next.hide();
-      load('', '');
+      load('', '');     
       return;
     }
     console.log(quizData[index].image, quizData[index].name,quizData[index].audio );
