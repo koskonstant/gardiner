@@ -55,8 +55,8 @@ $show_user_selection = ($is_admin==1) ? ',`members`.`USR_FName`,`members`.`USR_L
 								<?php echo $user_th; ?>
 								<th>Date</th>
 								<th>Level</th>
-								<th>Hints</th>
-								<th>Time (sec)</th>
+								<th>Hints per Face in sec</th>
+								<th>Overall Hints / Time (sec)</th>
 								</tr>
 							</thead>
 							<tbody>
