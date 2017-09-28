@@ -68,7 +68,7 @@
 							<i class="fa  fa-question-circle"></i>
 							<span>Hints: </span>
 							<div class="result">
-							<p id="hintsused" class="timer"></p>
+							<p id="hintsused" class="timer">0</p>
 							</div>
 				    	</a>
 					</li>
@@ -89,21 +89,10 @@
 							<p id="levelid" class="level-num"></p>
 							</div>
 				    	</a>
-				  </li>
-			    <li>
-						<a class="score" data-toggle="control-sidebar">
-							<i class="fa fa-star-o"></i>
-							<span>Score: </span>
-							<div class="result">
-							<p id="score-counter" class="counter">0</p>
-							</div>
-						</a>
-				  </li>
+				  </li>			    
 					<?php } ?>
-			    <li>
-						<a href="home.php" data-toggle="control-sidebar"><i class="fa fa-home"></i></a>
-					</li>			      
-					<li class="flags-menu">
+			    			      
+					<!--<li class="flags-menu">
 			      	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<img src="" class="flag flag-us"> 
 								<i class="fa fa-angle-down"></i>
@@ -116,7 +105,7 @@
 									<a href="javascript:void(0);"><img src="img/blank.gif" class="flag flag-gr"> Ελληνικά</a>
 								</li>
 							</ul>					
-					</li>
+					</li>-->
 					<?php if( $user->is_logged_in() ){ ?>			      
 					<!-- User Account: style can be found in dropdown.less -->
 					<li class="dropdown user user-menu">
