@@ -7,9 +7,9 @@ date_default_timezone_set('Europe/London');
 
 //database credentials
 define('DBHOST','localhost');
-define('DBUSER','root');
-define('DBPASS','');
-define('DBNAME','ser_game');
+define('DBUSER','gardadmin');
+define('DBPASS','g@rd@n1l3');
+define('DBNAME','gardiner_db');
 
 //application address
 define('DIR','game.local');
