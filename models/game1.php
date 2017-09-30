@@ -38,7 +38,6 @@ $lastKeyValue = $quizdatarray[$lastKey];
 $sum_hints = $quizdatarray[$length-1]->helps;
 $sum_time = $quizdatarray[$length-1]->time;
 $sum_hints_time = $hint_clicks.' / '.$sum_time;
-echo $sum_hints_time;
 // echo $hint_clicks."<p></p>";
 // echo $game_time_finished;
 
@@ -49,14 +48,15 @@ $smtp1 = $db->prepare("SELECT * FROM `members` WHERE `memberID`=$user_session_id
 $smtp1->execute();
 $row1 = $smtp1->fetch();
 $is_admin=$row1['is_admin'];  
-$show_admin = ($is_admin==1) ? '1':'';
+$show_admin = ($is_admin==1) ? '1':'2';
 
-$smtp = $db->prepare("INSERT INTO `ser_game`.`game_sessions` 
-    (`user_id`, `game_session_id`, `locale_id`, `game_level`, `game_clicks`, `game_time_finished`, `is_admin`, `game_id`)
-    VALUES ('".$user_session_id."','','".$date."','".$level."','".$hints_msg."','".$sum_hints_time."','".$show_admin."','1')");						
+$smtp = $db->prepare("INSERT INTO `game_sessions` 
+    (`user_id`,`start_datetime`,`game_level`, `game_clicks`, `game_time_finished`, `is_admin`, `game_id`)
+    VALUES ('".$user_session_id."','".$date."','".$level."','".$hints_msg."','".$sum_hints_time."','".$show_admin."','1')");						
 $smtp->execute();
 
 echo 'Data inserted to db successfully!!';
 
 header("Location: ../game1.php");
-die();
+
+?>
