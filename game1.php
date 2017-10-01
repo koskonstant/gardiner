@@ -4,14 +4,15 @@
 if(!$user->is_logged_in()){ header('Location: login.php'); } 
 
 //define page title
-$title = 'Game 1';
+$title = 'Gardiner - Face Name Game';
+if(isset($_POST['difficulty-levels'])){
+	$_SESSION['difficulty-levels'] = $_POST['difficulty-levels'];
+}
+$level=$_SESSION['difficulty-levels'];
 
 //include header template
 require('layout/header.php');
 require('layout/nav.php'); 
-
-
-//style="overflow: hidden" (line for disable scroll)
 ?>
 
 <div class="container">
@@ -27,7 +28,7 @@ require('layout/nav.php');
 								</div>
 
 								<div id="start" class="start-title center-align">
-									<h3 id="startitle" class="red-text text-darken-3">Memorize the name of each face</h3>
+									<h3 id="startitle" class="red-text text-darken-3">When you are ready press the Nex Button</h3>
 								</div>
 
 								<div id="end" class="end-title center-align" style="display:none">
@@ -39,7 +40,7 @@ require('layout/nav.php');
 						</div>
 
 						<div class="textcont">
-							<h5 id="text" class="text-area" style="display:none">My name is <span id="name"></span></h5>
+							<h5 id="text" class="text-area normal-weight" style="display:none">My name is <span id="name"></span></h5>
 							<audio id="audioNameEngine"></audio>
 							<audio id="audioEngine"></audio>
 						</div>
@@ -52,20 +53,15 @@ require('layout/nav.php');
 								<a id="next" class="btn btn-game side-padding">Next</a>
 							</div>
 						</div>
-	           		</div>
-		            
+	           		</div>		            
 	            </div>
 		    </section>
 		</div>
 	</div>
 </div>	
-<?php 
-	//include header template
-	require('layout/footer.php'); 
-	?>
-	<script>
-		loadFaces("/gardiner/data/quizData.json",level) ;
-	</script>	
-
+<?php require('layout/footer.php');	?>
+<script>
+	loadFaces();
+</script>
 </body>
 </html>

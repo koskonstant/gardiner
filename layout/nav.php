@@ -86,8 +86,8 @@
 							<i class="fa fa-level-up"></i>
 							<span>Level: </span>
 							<div class="result">
-							<p id="levelid" class="level-num"></p>
-							</div>
+							<p id="levelid" class="level-num"><?php echo $_SESSION['difficulty-levels'];?></p>
+							</div> 
 				    	</a>
 				  </li>			    
 					<?php } ?>

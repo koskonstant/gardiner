@@ -4,7 +4,7 @@
 if(!$user->is_logged_in()){ header('Location: login.php'); } 
 
 //define page title
-$title = 'Game 1';
+$title = 'Gardiner - Face Name Game';
 
 //include header template
 require('layout/header.php'); 
@@ -21,14 +21,25 @@ require('layout/nav.php');
 		        <div class="overlay">
 		            <div class="container text-center">
 		                <div class="editContent">
-		                    <h2>Memory Fun</h2>		                   
+		                    <h2>Face Name Game</h2>		                   
 		                </div>
 		                <div class="introduction">
 		                	<p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus molestie ex quis rutrum mattis. Pellentesque nec odio tellus. Nam sed nisl in lectus malesuada hendrerit. Etiam ut urna in neque maximus tristique. Suspendisse egestas molestie magna nec laoreet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
 		                </div>
-		                <div class="pull-right">
-	                        <a href="game1.php" class="btn btn-game side-padding">Get Started</a>
-	                    </div>
+                      <div class="col-md-3 marginauto">
+                        <h3 class="mg__start-screen--sub-heading">Select Level</h3>
+						<form action="game1.php" method="post">
+                        <select name="difficulty-levels" id="difficulty-levels">
+                          <option value="1" selected>Level 1 - ( 5 Faces )</option>
+                          <option value="2">Level 2 - ( 10 Faces )</option>
+                          <option value="3">Level 3 - ( 15 Faces )</option>
+                        </select>
+                        <div class="marginauto normaltopmargin">
+                         <button id="btn" class="btn btn-game marginauto">Get Started</button>
+                        </div>
+						</form>
+                    </div>
+                    <div class="clear"></div>                   
 		            </div>
 		        </div>
 		    </section>
@@ -36,7 +47,4 @@ require('layout/nav.php');
 	</div>
 </div>
 
-<?php 
-//include header template
-require('layout/footer.php'); 
-?>
+<?php require('layout/footer.php'); ?>
