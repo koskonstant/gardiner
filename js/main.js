@@ -18,6 +18,7 @@ function startGame(url, level) {
   var $nextlvl = $('#nextlvlbutton');
   var $myname = $('#myname');
   var $lvlid = $('#lvlid');
+  var $info = $('#info');
 
   var startTime;
   var timeInterval;
@@ -85,6 +86,7 @@ function startGame(url, level) {
   function update() {
     if (index === 0) {
       $start.hide();
+      $info.show();
       $myname.show();
       $answer.show();
       $help.show();
@@ -104,6 +106,7 @@ function startGame(url, level) {
       $help.hide();
       $hints.hide();
       $hintsused.hide();
+      $info.hide();
       load('');
       $('#datasend').val(JSON.stringify(userAnswers));
       $lvlid.val(level);
@@ -184,7 +187,7 @@ function loadFaces(url, level) {
   var $name = $('#name');
   var $prev = $('#previous');
   var $next = $('#next');
-  var $lvl = $('#levelid');
+  var $lvl = $('#levelid');  
 
   $.ajax({                                     
     url: 'models/game1-play.php',

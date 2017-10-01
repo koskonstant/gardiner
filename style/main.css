@@ -2374,3 +2374,12 @@ a.dlbtn:hover .details, a.dlbtn:focus .details {
 .normal-weight span{
   font-weight: 700;
 }
+
+.infodetails {
+    margin-top: 15px;
+}
+
+.infodetails span{
+  display: inline-block;
+  margin-left: 5px;
+}

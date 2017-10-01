@@ -43,6 +43,10 @@ $level=$_SESSION['difficulty-levels'];
 								<h5 id="myname" style="display:none" class="text-area normal-weight" style="">My name is </h5> 
 								<input id="text" type="text" style="display:none">							
 							</div>
+							<div id="info" class="infodetails" style="display:none">
+								<i class="fa fa-info" aria-hidden="true"></i>
+								<span>When you complete filling the name press ENTER</span>
+								</div>
 
 							<div class="navigation">
 								<div class="pull-left">
