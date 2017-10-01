@@ -83,15 +83,13 @@ function startGame(url, level) {
  
 
   function update() {
-
     if (index === 0) {
       $start.hide();
       $myname.show();
       $answer.show();
       $help.show();
       $hints.show();
-      $hintsused.show();
-     
+      $hintsused.show();     
       $next.addClass('pulse');
       startQuestion();
       console.log('quiz');
@@ -144,8 +142,7 @@ function startGame(url, level) {
       var sumhints = parseInt(currentAnswer.helps) + parseInt($updatedhints);
       $hintsused.text(sumhints);
       $answer.val(tip);
-    });       
-
+    });   
   }
 
   function removeListeners() {
@@ -156,13 +153,11 @@ function startGame(url, level) {
   function startQuestion() {
     $next.removeClass('scale-in');
     $next.hide();
-    load(ROOTPATH+quizData[index].image);
-    addListeners(quizData[index].name);
-    currentAnswer = Answer(quizData[index].id,quizData[index].name);
+    load(ROOTPATH+quizData[index].artifact_path);
+    addListeners(quizData[index].artifact_name);
+    currentAnswer = Answer(quizData[index].artifact_instance_id,quizData[index].artifact_name);
     $answer.val('');
-    $answer.focus();
-   
-   
+    $answer.focus(); 
   }
 
   function completeQuestion() {   
@@ -191,16 +186,21 @@ function loadFaces(url, level) {
   var $next = $('#next');
   var $lvl = $('#levelid');
 
-  $.getJSON(url, function (data) {
-    console.log(data);
-    quizData = data;
-  })
-    .always(function () {
+  $.ajax({                                     
+    url: 'models/game1-play.php',
+    data: "",
+    dataType: 'json',
+    success: function(data)
+    {
+      quizData = data;
+      // quizData = data.sort(function() { return 0.5 - Math.random() });
+      console.log(quizData);
       if (quizData.length < 1) {
         console.log(quizData.length);
         errorAction();
       }
-    });
+    }      
+  });
 
 
   function errorAction() {
@@ -235,8 +235,8 @@ function loadFaces(url, level) {
       load('', '');     
       return;
     }
-    console.log(quizData[index].image, quizData[index].name,quizData[index].audio );
-    load(quizData[index].image, quizData[index].name, quizData[index].audio);
+    console.log(quizData[index].artifact_path, quizData[index].artifact_name,quizData[index].artifact_aud );
+    load(quizData[index].artifact_path, quizData[index].artifact_name, quizData[index].artifact_aud);
   }
 
   function load(image, name, audio) {
@@ -247,9 +247,9 @@ function loadFaces(url, level) {
     if(typeof(quizData[index]) != "undefined"){    
       playNameAudio('mp3/my-name-is.mp3');
       setTimeout(function() {
-        playAudio('mp3/faces/' + quizData[index].audio);
-      }, 900); 
-    }   
+        playAudio(quizData[index].artifact_aud);
+      }, 900);
+    }  
   }
 
   function playNameAudio(sAudio) {

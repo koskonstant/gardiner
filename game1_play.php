@@ -4,12 +4,12 @@
 if(!$user->is_logged_in()){ header('Location: login.php'); } 
 
 //define page title
-$title = 'Game 1';
-$level = 1;
+$title = 'Gardiner - Face Name Game';
 
 //include header template
 require('layout/header.php');
 require('layout/nav.php'); 
+$level=$_SESSION['difficulty-levels'];
 
 //style="overflow: hidden" (line for disable scroll)
 ?>
@@ -28,7 +28,8 @@ require('layout/nav.php');
 
 									<div id="end" class="end-title center-align" style="display:none">
 										<form action="models/game1.php">
-											<button id="nextlvlbutton" class="btn btn-game side-padding">Go to Next Level !</button>
+											<h2 class="mg__onend--heading normaltopmargin">Well Done!</h2>
+											<button id="nextlvlbutton" class="btn btn-game side-padding">Play Again</button>
 											<input type="hidden" id="datasend" name="qdat">
 											<input type="hidden" id="lvlid" name="level">
 										</form>
@@ -39,7 +40,7 @@ require('layout/nav.php');
 							</div>
 
 							<div class="namefillarea">
-								<h5 id="myname" style="display:none" class="text-area" style="">My name is </h5> 
+								<h5 id="myname" style="display:none" class="text-area normal-weight" style="">My name is </h5> 
 								<input id="text" type="text" style="display:none">							
 							</div>
 
@@ -61,8 +62,8 @@ require('layout/nav.php');
 	//include header template
 	require('layout/footer.php'); 
 	?>
-	<script>
-		startGame("/gardiner/data/quizData.json", <?= $level?>);
+	<script>    
+		startGame("/gardiner/models/game1-play.php",<?= $level;?>);
 	</script>	
 </body>
 </html>
