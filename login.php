@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
 }//end if submit
 
 //define page title
-$title = 'Login';
+$title = 'Gardiner - Login';
 
 //include header template
 require('layout/header.php'); 

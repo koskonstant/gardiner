@@ -2,8 +2,7 @@
 require('../includes/config.php'); 
 
 $quizdat = $_REQUEST["qdat"];
-print_r($_REQUEST);
-$level = $_REQUEST["level"];
+$level=$_SESSION['difficulty-levels'];
 $quizdatarray = json_decode($quizdat);
 
 // echo '<pre>';
@@ -57,6 +56,6 @@ $smtp->execute();
 
 echo 'Data inserted to db successfully!!';
 
-header("Location: ../game1.php");
+header("Location: ../game1-intro.php");
 
 ?>

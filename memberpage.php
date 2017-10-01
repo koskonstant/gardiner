@@ -4,7 +4,7 @@
 if(!$user->is_logged_in()){ header('Location: login.php'); } 
 
 //define page title
-$title = 'Members Page';
+$title = 'Gardiner -  Members Page';
 
 //include header template
 require('layout/header.php');

@@ -5,7 +5,7 @@
 if(!$user->is_logged_in()){ header('Location: login.php'); } 
 
 //define page title
-$title = 'Game 2';
+$title = 'Gardiner - Matching Tiles Game';
 
 //include header template
 require('layout/header.php'); 
