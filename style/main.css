@@ -140,7 +140,6 @@ body .btn-game {
   font-family: 'Luckiest Guy', cursive;
   font-weight: 500;
   font-size: 20px;
-  display: block;
   padding: 4px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
@@ -2364,4 +2363,14 @@ a.dlbtn .details {
 a.dlbtn:hover .details, a.dlbtn:focus .details {
   right: 8px;
   opacity: 1;
+}
+
+.normal-weight{
+  font-weight: 500;
+  font-family: 'Oswald', sans-serif !important;
+  font-size:30!important;
+}
+
+.normal-weight span{
+  font-weight: 700;
 }

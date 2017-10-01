@@ -882,7 +882,7 @@
       this.gameMessages.innerHTML = '<h2 class="mg__onend--heading">Well Done!</h2>\
         <p class="mg__onend--message">You finished the round in ' + this.numMoves + ' moves in ' + clock + ' seconds. Go you.</p>\
         <div class="click_msg">' + msg + '</div>\
-        <button id="mg__onend--restart" class="mg__button">Play again?</button>';
+        <button id="mg__onend--restart" class="mg__button btn btn-game">Play again?</button>';
       this._timerStop();
       this.timeFinished = clock;
       this.game.appendChild(this.gameMessages);
