@@ -54,51 +54,35 @@ if(isset($_POST['submit'])){
 
 		//create the activasion code
 		$activasion = md5(uniqid(rand(),true));
+    $birthdate = date("Y-m-d",strtotime($_POST['USR_DoB']));
 
 		try {
 
 			//insert into database with a prepared statement
-			$stmt = $db->prepare('INSERT INTO members (`username`,`password`,`email`,`USR_DoB`,`USR_Gender_Id`,`USR_ProfilePicture`,`USR_FName`,`USR_MName`,`USR_LName`,`USR_PoB`,`USR_Race`,`USR_ResAddrStreet`,`USR_ResAddrZip`,`USR_ResAddrCity`,`USR_ResAddrState`,`USR_ResAddrCountry`,`USR_PhoneNum`,`USR_ProfileURL`,`USR_WebsiteURL`,`Lang_ID`,`USR_Work`,`USR_Interests`, `active`) VALUES (:username, :password, :email, :USR_DoB, :USR_Gender_Id, :USR_ProfilePicture, :USR_FName, :USR_MName, :USR_LName, :USR_PoB, :USR_Race, :USR_ResAddrStreet, :USR_ResAddrZip, :USR_ResAddrCity, :USR_ResAddrState, :USR_ResAddrCountry, :USR_PhoneNum, :USR_ProfileURL, :USR_WebsiteURL, :Lang_ID, :USR_Work, :USR_Interests, :active)');
-			$stmt->execute(array(
-				':username' => $_POST['username'],
-				':password' => $hashedpassword,
-				':email' => $_POST['email'],
-				':USR_DoB' => $_POST['USR_DoB'],
-				':USR_Gender_Id' => 'M',
-				':USR_ProfilePicture' => $_POST['USR_ProfilePicture'],
-				':USR_FName' => $_POST['USR_FName'],
-				':USR_MName' => $_POST['USR_MName'],
-				':USR_LName' => $_POST['USR_LName'],
-				':USR_PoB' => $_POST['USR_PoB'],
-				':USR_Race' => $_POST['USR_Race'],
-				':USR_ResAddrStreet' => $_POST['USR_ResAddrStreet'],
-				':USR_ResAddrZip' => $_POST['USR_ResAddrZip'],
-				':USR_ResAddrCity' => $_POST['USR_ResAddrCity'],
-				':USR_ResAddrState' => $_POST['USR_ResAddrState'],
-				':USR_ResAddrCountry' => $_POST['USR_ResAddrCountry'],
-				':USR_PhoneNum' => $_POST['USR_PhoneNum'],
-				':USR_ProfileURL' => $_POST['USR_ProfileURL'],
-				':USR_WebsiteURL' => $_POST['USR_WebsiteURL'],
-				':Lang_ID' => 'EN',
-				':USR_Work' => $_POST['USR_Work'],
-				':USR_Interests' => $_POST['USR_Interests'],
-				':active' => $activasion
-			));
+			$stmt = $db->prepare("INSERT INTO members (`username`,`password`,`email`,`USR_DoB`,`USR_Gender_Id`,`USR_FName`,`USR_MName`,`USR_LName`,`USR_PoB`,`USR_ResAddrStreet`,`USR_ResAddrZip`,`USR_ResAddrCity`,`USR_ResAddrState`,`USR_ResAddrCountry`,`USR_PhoneNum`,`USR_ProfileURL`,`USR_WebsiteURL`,`Lang_ID`,`USR_Work`,`USR_Interests`,`USR_EduId`, `active`, `resetToken`,`resetComplete`,`is_admin`) 
+								  VALUES ('".$_POST['username']."', '".$hashedpassword."', '".$_POST['email']."', '".$birthdate."', '".$_POST['USR_Gender']."', '".$_POST['USR_FName']."', '".$_POST['USR_MName']."', '".$_POST['USR_LName']."', '".$_POST['USR_PoB']."', '".$_POST['USR_ResAddrStreet']."', '".$_POST['USR_ResAddrZip']."', '".$_POST['USR_ResAddrCity']."', '".$_POST['USR_ResAddrState']."', '".$_POST['USR_ResAddrCountry']."', '".$_POST['USR_PhoneNum']."','".$_POST['USR_ProfileURL']."', '".$_POST['USR_WebsiteURL']."','1', '".$_POST['USR_Work']."', '".$_POST['USR_Interests']."','".$_POST['USR_EduId']."', '".$activasion."', 'NONE','NONE','0')");
+			
+			$stmt->execute();
+			
 			$id = $db->lastInsertId('memberID');
 
 			//send email
 			$to = $_POST['email'];
+
 			$subject = "Registration Confirmation";
 			$body = "<p>Thank you for registering at demo site.</p>
 			<p>To activate your account, please click on this link: <a href='".DIR."/activate.php?x=$id&y=$activasion'>".DIR."/activate.php?x=$id&y=$activasion</a></p>
 			<p>Regards Site Admin</p>";
 
-			$mail = new Mail();
-			$mail->setFrom(SITEEMAIL);
-			$mail->addAddress($to);
-			$mail->subject($subject);
-			$mail->body($body);
-			$mail->send();
+			$headers .= "MIME-Version: 1.0\r\n";
+			$headers .= "Content-type: text/html\r\n";
+			$headers .= 'From: koskonstant@gmail.com' . "\r\n" .
+			'Reply-To: koskonstant@gmail.com' . "\r\n" .
+			'X-Mailer: PHP/' . phpversion();
+			mail($to, $subject, $body, $headers);
+
+			
+
 
 			//redirect to index page
 			header('Location: index.php?action=joined');
@@ -114,7 +98,7 @@ if(isset($_POST['submit'])){
 }
 
 //define page title
-$title = 'Demo';
+$title = 'Gardiner - Registration';
 
 //include header template
 require('layout/header.php');
@@ -221,7 +205,7 @@ require('layout/nav.php');
 	                    <div class="row">
 	                        <div class="input-field col-sm-4">
 	                            <i class="material-icons prefix">view_list</i>
-	                            <select id="USR_Gender">
+	                            <select id="USR_Gender" name="USR_Gender">
 	                                <option value="" disabled selected>Choose Gender</option>
 	                                <option value="1">Male</option>
 	                                <option value="2">Female</option>
@@ -232,7 +216,7 @@ require('layout/nav.php');
 	                        <div class="input-field col-sm-4">
 	                            <i class="material-icons prefix">today</i>
 	                            <input type="text" name="USR_DoB" id="form-date-birth" class="form-control input-md datepicker" tabindex="1">
-	                            <label for="date-birth">Date of Birth</label>
+	                            <label for="USR_DoB">Date of Birth</label>
 	                        </div>
 	                        <div class="input-field col-sm-4">
 	                            <i class="material-icons prefix">location_on</i>
@@ -241,7 +225,7 @@ require('layout/nav.php');
 	                            <span class="myerror" id="USR-PoB_error_message"></span>
 	                        </div>
 	                    </div>			          
-			          	<button type="submit" class="next-btn btn-game sf-right sf-btn sf-btn-next subutton next">Next</button>
+			          	<button type="submit" class="next-btn btn-game sf-right sf-btn sf-btn-next subutton next pull-right">Next</button>	
 			        </div>
 			        
 			        <div class="step2">					        
@@ -324,17 +308,17 @@ require('layout/nav.php');
 	                    <div class="row">
 	                        <div class="input-field col col-sm-12">
 	                            <i class="material-icons prefix">view_list</i>
-	                            <select>
+	                            <select name="USR_EduId">
 	                                <option value="" disabled selected>Add Education Level</option>
 	                                <option value="1">ISCED 0: Early childhood education (‘less than primary’ for educational attainment).</option>
 	                                <option value="2">ISCED 1: Primary education.</option>
 	                                <option value="3">ISCED 2: Lower secondary education.</option>
 	                                <option value="4">ISCED 3: Upper secondary education.</option>
-	                                <option value="4">ISCED 4: Post-secondary non-tertiary education.</option>
-	                                <option value="4">ISCED 5: Short-cycle tertiary education.</option>
-	                                <option value="4">ISCED 6: Bachelor’s or equivalent level.</option>
-	                                <option value="4">ISCED 7: Master’s or equivalent level.</option>
-	                                <option value="4">ISCED 8: Doctoral or equivalent level.</option>
+	                                <option value="5">ISCED 4: Post-secondary non-tertiary education.</option>
+	                                <option value="6">ISCED 5: Short-cycle tertiary education.</option>
+	                                <option value="7">ISCED 6: Bachelor’s or equivalent level.</option>
+	                                <option value="8">ISCED 7: Master’s or equivalent level.</option>
+	                                <option value="9">ISCED 8: Doctoral or equivalent level.</option>
 	                            </select>
 	                        </div>                            
 	                    </div>                    

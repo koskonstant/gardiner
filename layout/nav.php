@@ -44,7 +44,7 @@
 			    <li>
 						<a class="score" data-toggle="control-sidebar">
 							<i class="fa fa-star-o"></i>
-							<span>Score: </span>
+							<span>Moves: </span>
 							<div class="result">
 							<p id="score-counter" class="counter">0</p>
 							</div>

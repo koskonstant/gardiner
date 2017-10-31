@@ -477,7 +477,7 @@
       </div>';
     this.gameMeta.innerHTML = this.gameMetaHTML;
     this.game.appendChild(this.gameMeta);
-    this.gameStartScreenHTML = '<p class="mg__start-screen--text">Flip the tiles and try to match them up in pairs. Pair up all the tiles to win. Try to complete the game in as few moves as possible!</p>\
+    this.gameStartScreenHTML = '<p class="mg__start-screen--text">The “Matching Tiles” game aims to reveal every tile by matching pairs of identical tiles. The user can continue to guess until matching right each tile. The game promotes point-and-click interactions. When the user turns over a tile there is an audio and visual feedback regarding the attached tile </p>\
       <div class="col-md-8 marginauto">\
       <div class="col-md-6">\
       <h3 class="mg__start-screen--sub-heading">Select Level</h3>\

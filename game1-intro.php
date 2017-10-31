@@ -24,7 +24,7 @@ require('layout/nav.php');
 		                    <h2>Face Name Game</h2>		                   
 		                </div>
 		                <div class="introduction">
-		                	<p class="intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus molestie ex quis rutrum mattis. Pellentesque nec odio tellus. Nam sed nisl in lectus malesuada hendrerit. Etiam ut urna in neque maximus tristique. Suspendisse egestas molestie magna nec laoreet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+		                	<p class="intro">In the “Face Name game”, the player is invited to remember and write down the name of the people depicted in the section. The game starts with the presentation of the faces with their names respectively. The user can control the game pagination, so she/he can take her/his time to observe each face with its name and she/he could have the opportunity to remember the matches while playing the level.</p>
 		                </div>
                       <div class="col-md-3 marginauto">
                         <h3 class="mg__start-screen--sub-heading">Select Level</h3>
